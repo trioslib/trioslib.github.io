@@ -16,9 +16,8 @@
 title: Training Image Operators from Samples - TRIOSlib
 email: igordsm+trios@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  TRIOSlib is a library that contains implementations of state-of-the-art methods in Image Operator Learning. It has been used, in its many incarnations, in many research papers over the last 15 years. The current version (2.0) has had many parts rewritten and was redesigned to be flexible and to allow users to combine and extend each of its parts. 
+
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb

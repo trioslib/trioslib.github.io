@@ -1,8 +1,12 @@
 ---
-# You don't need to edit this file, it's empty on purpose.
-# Edit theme's home layout instead if you wanna make some changes
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
 ---
 
-bla bla bla
+TRIOSlib is a research library with implementations of state-of-the-art methods for Image Operator Learning. It has been used, in its many incarnations, in many research papers over the last 15 years. 
+The current version (2.0) has had many parts rewritten and was redesigned to be flexible and 
+to allow users to combine and extend each of its parts. 
+
+If you use TRIOSlib in your works please cite 
+
+> I. S. Montagner, N. S. T. Hirata and R. Hirata, "Image Operator Learning and Applications," 2016 29th SIBGRAPI Conference on Graphics, Patterns and Images Tutorials (SIBGRAPI-T), Sao Paulo, 2016, pp. 38-50.
+
