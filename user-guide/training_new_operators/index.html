@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Training new operators - TRIOSlib Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">TRIOSlib Documentation</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../introduction/">Introduction</a>
+</li>
+                            
+<li >
+    <a href="../using_trained_operators/">Using trained operators</a>
+</li>
+                            
+<li class="active">
+    <a href="./">Training new operators</a>
+</li>
+                            
+<li >
+    <a href="../extending_trios/">Extending TRIOSlib</a>
+</li>
+                            
+<li >
+    <a href="../performance-evaluation/">Performance evaluation</a>
+</li>
+                            
+<li >
+    <a href="../advanced_methods/">Advanced methods</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Methods <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../methods/aperture/">Aperture</a>
+</li>
+                            
+<li >
+    <a href="../../methods/two-level/">Two level</a>
+</li>
+                            
+<li >
+    <a href="../../methods/ISI/">ISI</a>
+</li>
+                            
+<li >
+    <a href="../../methods/nilc/">NILC</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../../publications-using-trioslib/">Publications</a>
+                    </li>
+                    <li >
+                        <a href="../../examples/">Examples</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../using_trained_operators/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../extending_trios/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#training-new-operators">Training new operators</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="training-new-operators">Training new operators</h1>
+<p>Image transforms in TRIOSlib require three basic parameters: a neighborhood 
+window $W$, a <em>Feature Extractor</em> and a <em>Classifier</em>. Window creation routines
+were explained in the <a href="../Introduction">introduction</a>, so in this page we focus
+on the other two parameters. In this example we use a small \(9\times 7\) 
+rectangular window (shown below).</p>
+<p><center>
+    <img src="../../img/rect9x7.png" width="300px">
+</center></p>
+<p>A <em>Feature Extractor</em> transforms a 2D image patch \(X\) observed using a 
+window as the one above into a convenient vectorial representation 
+\(\varphi(X)\). The most basic method for feature extraction is to use raw 
+pixel values as features. Thus, in this case it results in a feature vector with 
+\(63\) features, one for each pixel in our \(9\times 7\) window (in raster order). 
+This simple method is implemented in the 
+<code>trios.feature_extractors.RAWFeatureExtractor</code> class. </p>
+<p>A <em>Classifier</em> in TRIOS determines the output value \(\hat y\) of a pixel in 
+the output image using the vectorial representation \(\varphi(x)\) computed by 
+the previous step (Feature Extraction). In this example we use Decision Trees, 
+as they do not require parameter determination and achieve reasonable 
+performance in many problems. We use scikit-learn's implementation 
+(<code>sklearn.tree.DecisionTreeClassifier</code>) via the wrapper class 
+<code>trios.classifiers.SKClassifier</code>. </p>
+<p>Images are processed by first applying the feature extractor to a pixel in the 
+input and then using the trained classifier to determine the output value. This 
+is done for all pixels in the input image. </p>
+<p>A local image transform is represented by the <code>trios.WOperator</code> class, which 
+combines specific feature extraction and classification methods to effectively
+process images. This class implements the learning process for image transforms 
+by appplying the selected feature method to all pixels of the input images of
+a <code>trios.Imageset</code> and coupling their vectorial representations with the desired
+output values to train a classifier. </p>
+<p>To illustrate the creation of a local image transform using TRIOS we will 
+process the <em>jung</em> dataset again. <em>jung</em> serves a role in image transform 
+learning similar to MNIST in Deep Learning: an easy problem that can be used
+to quickly test new ideas. </p>
+<p>The code below creates an image transform using a \(9\times 7\) window, raw
+pixel values as features and a decision tree as classifier. The method 
+<code>WOperator.train</code> takes as input a <code>trios.Imageset</code> instance and executes the 
+learning procedure. After saving the image transform can be saved using 
+<code>p.save_gzip(op, file_name)</code> it can be loaded again using the instructions from
+the <a href="../using_trained_operators/">last section</a>.</p>
+<pre><code class="python"># file docs/examples/creating_image_transforms.py
+from trios.classifiers import SKClassifier
+from sklearn.tree import DecisionTreeClassifier
+from trios.feature_extractors import RAWFeatureExtractor
+import trios
+import numpy as np
+
+import trios.shortcuts.persistence as p
+import trios.shortcuts.window as trios_win
+
+if __name__ == '__main__':
+    training_set = trios.Imageset.read('jung-images/training.set')
+    test = trios.Imageset.read('jung-images/test.set')
+
+    win = trios_win.rectangle(9, 7)
+    classifier = SKClassifier(DecisionTreeClassifier())
+    fext = RAWFeatureExtractor(win)
+    op = trios.WOperator(win, classifier, fext)
+
+    op.train(training_set)
+    p.save_gzip(op, 'basic-jung.op.gz')
+
+    print('Error: ', op.eval(test))
+</code></pre>
+
+<pre>
+Error: 0.010420612911861719
+</pre>
+
+<p>This example produces as error of about \(1\%\), double the value of the 
+trained transform used in the <a href="../using_trained_operators/">last section</a>. 
+Even in this simple problem using advanced techniques can significantly 
+increase performance. The <a href="../advanced_methods/">Advanced Methods</a> page
+provides an overview of the implemented methods and when to use them. Each 
+method is also documented separately and includes an example of use. </p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '../..';</script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../mathjax-config.js"></script>
+        <script src="../../search/require.js"></script>
+        <script src="../../search/search.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&larr;</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&rarr;</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Two level - TRIOSlib Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">TRIOSlib Documentation</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../../user-guide/introduction/">Introduction</a>
+</li>
+                            
+<li >
+    <a href="../../user-guide/using_trained_operators/">Using trained operators</a>
+</li>
+                            
+<li >
+    <a href="../../user-guide/training_new_operators/">Training new operators</a>
+</li>
+                            
+<li >
+    <a href="../../user-guide/extending_trios/">Extending TRIOSlib</a>
+</li>
+                            
+<li >
+    <a href="../../user-guide/performance-evaluation/">Performance evaluation</a>
+</li>
+                            
+<li >
+    <a href="../../user-guide/advanced_methods/">Advanced methods</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Methods <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../aperture/">Aperture</a>
+</li>
+                            
+<li class="active">
+    <a href="./">Two level</a>
+</li>
+                            
+<li >
+    <a href="../ISI/">ISI</a>
+</li>
+                            
+<li >
+    <a href="../nilc/">NILC</a>
+</li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="../../publications-using-trioslib/">Publications</a>
+                    </li>
+                    <li >
+                        <a href="../../examples/">Examples</a>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../aperture/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../ISI/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#two-level-operators">Two-level operators</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="two-level-operators">Two-level operators</h1>
+<blockquote>
+<p>Reference: <em>Nina S. T. Hirata, "Multilevel Training of Binary Morphological 
+Operators" at IEEE Transactions on Pattern Analysis and Machine Intelligence, 
+2009</em>. </p>
+</blockquote>
+<p>Two level operators are an approach to combine several image transforms that use
+different (and relatively small) into a single (and better) image transform. It
+works by building a new pattern using the output of the combined image 
+transforms. The figure below illustrates this process when combining three
+image transforms. </p>
+<p><center>
+<img alt="Two level transforms build a new pattern using the output of other image
+transforms" src="../two-level.png" />
+</center></p>
+<p>Designing these combinations of image transforms requires the determination of 
+how many image transforms to combine and how to determine the parameters of each 
+one. A simple yet effective approach is to take randomly subsets of moderate 
+size of a large neighborhood. The code below exemplifies this approach in the 
+<em>jung</em> dataset. Although results are better than the <a href="../../user-guide/training_new_operators/">basic 
+approach</a>, it is still worse than using more 
+sofisticated methods. </p>
+<p>Two-level is implemented as a feature extractor called <code>CombinationPattern</code>. It
+receives operators as arguments and computes the colored feature vector in the
+figure above. </p>
+<pre><code class="python"># file docs/examples/methods/two-level.py
+from trios.classifiers import SKClassifier
+from sklearn.tree import DecisionTreeClassifier
+from trios.feature_extractors import RAWFeatureExtractor, CombinationPattern
+import trios
+import numpy as np
+
+import trios.shortcuts.persistence as p
+import trios.shortcuts.window as w
+
+if __name__ == '__main__':
+    np.random.seed(10) # set this to select the same window everytime
+    images = trios.Imageset.read('../jung-images/level1.set')
+    images2 = trios.Imageset.read('../jung-images/level2.set')
+    test = trios.Imageset.read('../jung-images/test.set')
+
+    domain = np.ones((9, 7), np.uint8)
+    windows = [w.random_win(domain, 40, True) for i in range(5)]
+    ops = []
+    for i in range(5):
+        op = trios.WOperator(windows[i], SKClassifier(DecisionTreeClassifier()), RAWFeatureExtractor)
+        print('Training...', i)
+        op.train(images)
+        ops.append(op)
+
+    comb = CombinationPattern(*ops)
+    wop2 = trios.WOperator(comb.window, SKClassifier(DecisionTreeClassifier()), comb) 
+    print('Training 2nd level')
+    wop2.train(images2)
+
+    print('Error', wop2.eval(test))
+
+</code></pre>
+
+<pre>
+Training... 0
+Training... 1
+Training... 2
+Training... 3
+Training... 4
+Training 2nd level
+Error 0.007666954366731778
+</pre>
+
+<p>An approach that has also shown to be effective is to use basic shapes such as 
+crosses, lines and rectangles in the individual image transforms. <a href="http://www.vision.ime.usp.br/~igor/icpr14/">This page</a>
+shows some windows used when processing music documents. </p>
+<p>The <a href="../nilc/">NILC</a> method is an evolution of this random combination method and
+should achieve much better results. </p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '../..';</script>
+        <script src="../../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../../mathjax-config.js"></script>
+        <script src="../../search/require.js"></script>
+        <script src="../../search/search.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&larr;</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>&rarr;</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </body>
+</html>
