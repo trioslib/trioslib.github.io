@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Examples - TRIOSlib Documentation</title>
+        <title>Examples and trained operators - TRIOSlib Documentation</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -96,13 +96,17 @@
 <li >
     <a href="../methods/nilc/">NILC</a>
 </li>
+                            
+<li >
+    <a href="../methods/ka/">KA</a>
+</li>
                         </ul>
                     </li>
                     <li >
                         <a href="../publications-using-trioslib/">Publications</a>
                     </li>
                     <li class="active">
-                        <a href="./">Examples</a>
+                        <a href="./">Examples and trained operators</a>
                     </li>
                 </ul>
 
@@ -130,15 +134,28 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#code-samples">Code Samples</a></li>
+        <li class="main active"><a href="#examples-and-trained-operators">Examples and trained operators</a></li>
+            <li><a href="#trained-operators">Trained Operators</a></li>
+            <li><a href="#code-samples">Code Samples</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="code-samples">Code Samples</h1>
+<h1 id="examples-and-trained-operators">Examples and trained operators</h1>
+<h2 id="trained-operators">Trained Operators</h2>
+<p><a href="http://www.teses.usp.br/teses/disponiveis/45/45134/tde-21082017-111455/en.php">This thesis</a> used TRIOS to process several datasets. The image transforms below were used in that work and obtain very good performance. </p>
+<blockquote>
+<p>When using these operators (as shown in the <a href="../user-guide/using_trained_operators/">user guide</a>) for academic purposes do not forget to give credit by citing the papers listed using the <code>cite_me()</code> method! </p>
+</blockquote>
+<ul>
+<li><code>jung</code> (<a href="http://vision.ime.usp.br/projects/trios/">download dataset</a>) - <a href="../examples/trained-jung.op.gz">download</a>, error: 0.004. Uses: [KA][methods/ka.md]</li>
+<li><code>veja</code> (<a href="http://vision.ime.usp.br/projects/trios/">download dataset</a>) - <a href="../examples/trained-veja.op.gz">download</a>, error: 0.017. Uses: <a href="../methods/nilc/">NILC</a></li>
+<li><code>staffs</code> (<a href="http://www.cvc.uab.es/cvcmuscima/competition2013/index.htm">download dataset</a> <a href="../examples/trained-staffs.op.gz">download</a>. error: . Uses: </li>
+<li><code>DRIVE</code> (<a href="https://www.isi.uu.nl/Research/Databases/DRIVE/">download dataset</a>) - <a href="../examples/trained-drive.op.gz">download</a>, accuracy: . Uses: <a href="../methods/ka/">KA</a> </li>
+</ul>
+<h2 id="code-samples">Code Samples</h2>
 <p>TRIOSlib contains many commented code samples for many common tasks. See the 
-<a href="http://www.github.com/trioslib/trios/tree/master/examples">examples folder in our repository</a>.</p>
-<p>.</p></div>
+<a href="http://www.github.com/trioslib/trios/tree/master/examples">examples folder in our repository</a>.</p></div>
         </div>
 
         <footer class="col-md-12">
