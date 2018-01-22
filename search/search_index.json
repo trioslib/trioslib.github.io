@@ -192,7 +192,7 @@
         },
         {
             "location": "/examples/",
-            "text": "Examples and trained operators\n\n\nTrained Operators\n\n\nThis thesis\n used TRIOS to process several datasets. The image transforms below were used in that work and obtain very good performance. \n\n\n\n\nWhen using these operators (as shown in the \nuser guide\n) for academic purposes do not forget to give credit by citing the papers listed using the \ncite_me()\n method! \n\n\n\n\n\n\njung\n (\ndownload dataset\n) - \ndownload\n, error: 0.004. Uses: [KA][methods/ka.md]\n\n\nveja\n (\ndownload dataset\n) - \ndownload\n, error: 0.017. Uses: \nNILC\n\n\nstaffs\n (\ndownload dataset\n \ndownload\n. error: . Uses: \n\n\nDRIVE\n (\ndownload dataset\n) - \ndownload\n, accuracy: . Uses: \nKA\n \n\n\n\n\nCode Samples\n\n\nTRIOSlib contains many commented code samples for many common tasks. See the \n\nexamples folder in our repository\n.",
+            "text": "Examples and trained operators\n\n\nTrained Operators\n\n\nThis thesis\n used TRIOS to process several datasets. The image transforms below were used in that work and obtain very good performance. \n\n\n\n\nWhen using these operators (as shown in the \nuser guide\n) for academic purposes do not forget to give credit by citing the papers listed using the \ncite_me()\n method! \n\n\n\n\n\n\njung\n (\ndownload dataset\n) - \ndownload\n, error: 0.004. Uses: [KA][methods/ka.md]\n\n\nveja\n (\ndownload dataset\n) - \ndownload\n, error: 0.017. Uses: \nNILC\n\n\nstaffs\n (\ndownload dataset\n \ndownload\n. Accuracy: 96.71% (white pixels only) . Uses: Uses: \nNILC\n\n\nDRIVE\n (\ndownload dataset\n) - \ndownload\n, accuracy: . Uses: \nKA\n \n\n\n\n\nCode Samples\n\n\nTRIOSlib contains many commented code samples for many common tasks. See the \n\nexamples folder in our repository\n.",
             "title": "Examples and trained operators"
         },
         {
@@ -202,7 +202,7 @@
         },
         {
             "location": "/examples/#trained-operators",
-            "text": "This thesis  used TRIOS to process several datasets. The image transforms below were used in that work and obtain very good performance.    When using these operators (as shown in the  user guide ) for academic purposes do not forget to give credit by citing the papers listed using the  cite_me()  method!     jung  ( download dataset ) -  download , error: 0.004. Uses: [KA][methods/ka.md]  veja  ( download dataset ) -  download , error: 0.017. Uses:  NILC  staffs  ( download dataset   download . error: . Uses:   DRIVE  ( download dataset ) -  download , accuracy: . Uses:  KA",
+            "text": "This thesis  used TRIOS to process several datasets. The image transforms below were used in that work and obtain very good performance.    When using these operators (as shown in the  user guide ) for academic purposes do not forget to give credit by citing the papers listed using the  cite_me()  method!     jung  ( download dataset ) -  download , error: 0.004. Uses: [KA][methods/ka.md]  veja  ( download dataset ) -  download , error: 0.017. Uses:  NILC  staffs  ( download dataset   download . Accuracy: 96.71% (white pixels only) . Uses: Uses:  NILC  DRIVE  ( download dataset ) -  download , accuracy: . Uses:  KA",
             "title": "Trained Operators"
         },
         {

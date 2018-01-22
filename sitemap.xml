@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,37 +13,37 @@
         
     <url>
      <loc>/user-guide/introduction/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/user-guide/using_trained_operators/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/user-guide/training_new_operators/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/user-guide/extending_trios/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/user-guide/performance-evaluation/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/user-guide/advanced_methods/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -53,31 +53,31 @@
         
     <url>
      <loc>/methods/aperture/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/methods/two-level/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/methods/ISI/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/methods/nilc/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/methods/ka/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -86,7 +86,7 @@
     
     <url>
      <loc>/publications-using-trioslib/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -94,7 +94,7 @@
     
     <url>
      <loc>/examples/</loc>
-     <lastmod>2018-01-18</lastmod>
+     <lastmod>2018-01-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
